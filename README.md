@@ -145,7 +145,7 @@ After=network.target
 PermissionsStartOnly=True
 User=root
 Group=root
-ExecStart=/opt/netboxinfo/env/bin/python3 /opt/netbox-telegram/main.py --serve-in-foreground
+ExecStart=/opt/netbox-telegram/env/bin/python3 /opt/netbox-telegram/main.py --serve-in-foreground
 
 [Install]
 WantedBy=multi-user.target

@@ -183,7 +183,7 @@ chmod +x checkservice.sh
 - Ghi vào dịch vụ muốn giám sát.
 
 ```
-sed -i 's/SERVICES=/SERVICES= "netboxinfo"/' /opt/netbox-telegram/checkservice.sh
+sed -i 's/SERVICES=/SERVICES="netboxinfo"/' /opt/netbox-telegram/checkservice.sh
 ```
 
 - Sử dụng lệnh `crontab -e` và lưu đoạn cấu hình sau vào file crontab : 

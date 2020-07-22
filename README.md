@@ -116,7 +116,7 @@ Nếu chưa biết cách để lấy token, bạn có thể làm theo các bư�
 #### Tạo môi trường ảo python 
 
 ```
-cd /opt/netboxinfo
+cd /opt/netbox-telegram
 virtualenv env -p python3.6
 source env/bin/activate
 ```

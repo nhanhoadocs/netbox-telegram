@@ -203,3 +203,28 @@ Nhập vào `/start` để bắt đầu sử dụng bot.
 ![Imgur](https://i.imgur.com/GwGToRh.png)
 
 Sau khi nhập vào start, sẽ có những hướng dẫn để bạn có thể sử dụng thao tác với bot để lấy thông tin. 
+
+- Muốn xem tất cả các device hiện có, ta sử dụng `/alldevice` 
+
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox8.png)
+
+- Muốn xem tất cả các prefix hiện có, ta sử dụng `/allprefix` 
+
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox7.png)
+
+- Muốn xem tất cả các IP address hiện có, ta sử dụng `/allipaddr` 
+
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox9.png)
+
+- Để xem thông tin của từng IP, ta sử dụng `ipaddr` kèm địa chỉ IP
+
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox10.png)
+
+- Để xem thông tin của từng thiết bị, ta sử dụng `device` kèm tên thiết bị 
+
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox11.png)
+
+- Để xem thông tin của từng prefix, ta sử dụng `prefix` kèm địa chỉ prefix 
+
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox12.png)
+

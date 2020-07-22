@@ -285,10 +285,10 @@ def main():
         if same_ip :
             result = search_prefix(IP)
             bot.send_message(config.CHAT_ID,
-                str(result), parse_mode='Markdown')
+                            str(result), parse_mode='Markdown')
         else:
             bot.send_message(config.CHAT_ID,
-                'Nhập sai rồi !!', parse_mode='Markdown')
+                            'Nhập sai rồi !!',parse_mode='Markdown')
  
     @bot.message_handler(commands=["ipaddr"])
     def send_ip(message):
@@ -300,10 +300,10 @@ def main():
         if same_ip :
             result = search_ip_address(IP)
             bot.send_message(config.CHAT_ID,
-                str(result), parse_mode='Markdown')
+                            str(result), parse_mode='Markdown')
         else:
             bot.send_message(config.CHAT_ID,
-                'Nhập sai rồi !!', parse_mode='Markdown')
+                            'Nhập sai rồi !!', parse_mode='Markdown')
 
     @bot.message_handler(commands=["device"])
     def send_device(message):
@@ -314,11 +314,10 @@ def main():
         info_device = search_device(DEVI)
         comment = device_comment(DEVI)
         bot.send_message(config.CHAT_ID,
-            str(info_device), parse_mode='Markdown')
+                        str(info_device), parse_mode='Markdown')
         bot.send_message(config.CHAT_ID,
-            str(comment), parse_mode='Markdown')
+                        str(comment), parse_mode='Markdown')
 
-    # Tạo lệnh để lấy tất cả device 
     @bot.message_handler(commands=["alldevice"])
     def send_device_all(message):
         """
@@ -326,18 +325,16 @@ def main():
             Nếu số ký tự gửi về telegram lớn hơn 4096,
         sẽ chia ra gửi thành nhiều message
         """
-
         device_list = list_device()
         device_all = str(device_list)
         if len(device_all) > 4096:
             for x in range(0, len(device_all), 4096):
                 bot.send_message(config.CHAT_ID,
-                    device_all[x:x+4096], parse_mode='Markdown')
+                                device_all[x:x+4096], parse_mode='Markdown')
         else:
             bot.send_message(config.CHAT_ID,
-                device_all, parse_mode='Markdown')
+                            device_all, parse_mode='Markdown')
 
-    # Tạo lệnh để lấy tất cả prefix 
     @bot.message_handler(commands=["allprefix"])
     def send_prefix_all(message):
         """
@@ -350,12 +347,11 @@ def main():
         if len(prefix_all) > 4096:
             for x in range(0, len(prefix_all), 4096):
                 bot.send_message(config.CHAT_ID,
-                    prefix_all[x:x+4096], parse_mode='Markdown')
+                                prefix_all[x:x+4096], parse_mode='Markdown')
         else:
             bot.send_message(config.CHAT_ID,
-                prefix_all, parse_mode='Markdown')
+                            prefix_all, parse_mode='Markdown')
 
-    # Tạo lệnh để lấy tất cả ip address
     @bot.message_handler(commands=["allipaddr"])
     def send_ip_all(message):
         """
@@ -368,9 +364,9 @@ def main():
         if len(ipaddr_all) > 4096:
             for x in range(0, len(ipaddr_all), 4096):
                 bot.send_message(config.CHAT_ID,
-                    ipaddr_all[x:x+4096], parse_mode='Markdown')
+                                ipaddr_all[x:x+4096], parse_mode='Markdown')
         else:
             bot.send_message(config.CHAT_ID,
-                ipaddr_all, parse_mode='Markdown')
+                            ipaddr_all, parse_mode='Markdown')
 
     bot.polling()

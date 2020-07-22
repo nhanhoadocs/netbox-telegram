@@ -76,7 +76,7 @@ Thay id `633940211` bằng chat của bạn hoặc của group muốn nhận tin
 - Thêm vào url là đường dẫn đến trang netbox của bạn 
 
 ```
-sed -i 's/URL =/URL = "https:\/\/netbox.hungnv.com"/' /opt/netbox-telegram/config.py
+sed -i 's/URL_NB =/URL_NB = "https:\/\/netbox.hungnv.com"/' /opt/netbox-telegram/config.py
 ```
 
 Thay `https://netbox.hungnv.com` bằng url đẫn đến trang netbox của bạn. Với mỗi dấu `/` trên url, ta phải thêm 1 dấu `\` vào trước nó. 
@@ -110,6 +110,19 @@ Nếu chưa biết cách để lấy token, bạn có thể làm theo các bư�
 - Sau khi lưu ta sẽ có đoạn mã token. Hãy copy mã và điền vào file config. 
 
 ![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox3.png)
+
+**Kiểm tra lại file config**
+Sau khi ghi vào file, kiểm tra lại file config để chắc chắn đã điền đủ các thông tin 
+
+Sử dụng lệnh sau để kiểm tra : 
+
+```
+egrep -v "^*#|^$" /opt/netbox-telegram/config.py
+```
+
+Kết quả các trường đã điền thông tin như sau là ok 
+
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox6.png)
 
 ### Bước 3: Tạo venv 
 

@@ -310,9 +310,9 @@ def main():
         """
             Tạo lệnh để truyền vào device từ telegram 
         """
-        DEVI = message.text[8:]
-        info_device = search_device(DEVI)
-        comment = device_comment(DEVI)
+        DEVICE = message.text[8:]
+        info_device = search_device(DEVICE)
+        comment = device_comment(DEVICE)
         bot.send_message(config.CHAT_ID,
                         str(info_device), parse_mode='Markdown')
         bot.send_message(config.CHAT_ID,

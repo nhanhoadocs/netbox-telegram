@@ -93,23 +93,23 @@ Nếu chưa biết cách để lấy token, bạn có thể làm theo các bư�
 
 - Sau khi đăng nhập vào netbox, kích vào khu vực quản trị user : 
 
-![Imgur](https://i.imgur.com/tEXXh0o.png)
+![](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox1.png)
 
 - Kích vào tab user có hình bánh răng 
 
-![Imgur](https://i.imgur.com/CVXo6mF.png)
+![](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox2.png)
 
 - Ở mục token, kích vào Add token 
 
-![Imgur](https://i.imgur.com/wXKk9ni.png)
+![](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox4.png)
 
 - Lần lượt kích chọn user, ngày giờ hết hạn và lưu lại. 
 
-![Imgur](https://i.imgur.com/8md9zSF.png)
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox5.png)
 
 - Sau khi lưu ta sẽ có đoạn mã token. Hãy copy mã và điền vào file config. 
 
-![Imgur](https://i.imgur.com/osPfzjB.png)
+![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox3.png)
 
 ### Bước 3: Tạo venv 
 

@@ -103,7 +103,7 @@ Nếu chưa biết cách để lấy token, bạn có thể làm theo các bư�
 
 ![Imgur](https://i.imgur.com/wXKk9ni.png)
 
-- Lần lượt nhập vào user,, ngày giờ hết hạn và lưu lại. 
+- Lần lượt kích chọn user, ngày giờ hết hạn và lưu lại. 
 
 ![Imgur](https://i.imgur.com/8md9zSF.png)
 

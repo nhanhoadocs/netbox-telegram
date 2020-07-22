@@ -60,7 +60,7 @@ cd netbox-telegram
 - Thêm token bot telegram 
 
 ```
-sed -i 's/TOKEN_TELE =/TOKEN_TELE = "918364925:AAGbl5y7463f8DFFx4RhkeB3_eRhUUNfHHw"/' /opt/netbox-telegram/netboxinfo.py
+sed -i 's/TOKEN_TELE =/TOKEN_TELE = "918364925:AAGbl5y7463f8DFFx4RhkeB3_eRhUUNfHHw"/' /opt/netbox-telegram/config.py
 ```
 
 Thay `918364925:AAGbl5y7463f8DFFx4RhkeB3_eRhUUNfHHw` bằng token bot của bạn 
@@ -68,7 +68,7 @@ Thay `918364925:AAGbl5y7463f8DFFx4RhkeB3_eRhUUNfHHw` bằng token bot của bạ
 - Thêm message id telegram 
 
 ```
-sed -i 's/CHAT_ID =/CHAT_ID = "633940211"/' /opt/netbox-telegram/netboxinfo.py
+sed -i 's/CHAT_ID =/CHAT_ID = "633940211"/' /opt/netbox-telegram/config.py
 ```
 
 Thay id `633940211` bằng chat của bạn hoặc của group muốn nhận tin nhắn
@@ -76,7 +76,7 @@ Thay id `633940211` bằng chat của bạn hoặc của group muốn nhận tin
 - Thêm vào url là đường dẫn đến trang netbox của bạn 
 
 ```
-sed -i 's/URL =/URL = "https:\/\/netbox.hungnv.com"/' /opt/netbox-telegram/netboxinfo.py
+sed -i 's/URL =/URL = "https:\/\/netbox.hungnv.com"/' /opt/netbox-telegram/config.py
 ```
 
 Thay `https://netbox.hungnv.com` bằng url đẫn đến trang netbox của bạn. Với mỗi dấu `/` trên url, ta phải thêm 1 dấu `\` vào trước nó. 
@@ -84,7 +84,7 @@ Thay `https://netbox.hungnv.com` bằng url đẫn đến trang netbox của b�
 - Thêm vào token user của netbox. 
 
 ```
-sed -i 's/TOKEN_NB =/TOKEN_NB = "933f6df395h3b23bdd103k582nf93l450d64b4d260"/' /opt/netbox-telegram/netboxinfo.py
+sed -i 's/TOKEN_NB =/TOKEN_NB = "933f6df395h3b23bdd103k582nf93l450d64b4d260"/' /opt/netbox-telegram/config.py
 ``` 
 
 Thay token `933f6df395h3b23bdd103k582nf93l450d64b4d260` bằng token user trên netbox của bạn. 

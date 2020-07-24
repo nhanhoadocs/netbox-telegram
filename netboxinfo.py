@@ -12,8 +12,8 @@ regex_ip = re.compile(config.REGEX_IP)
 
 def search_prefix(ipaddr,prefix):
     """Lấy các thông tin của prefix
-    :param prefix: Là địa chỉ prefix truyền vào để lấy thông tin của prefix đó
-    :response: Trả về result là tổng hợp thông tin của prefix như: 
+    :Param prefix: Là địa chỉ prefix truyền vào để lấy thông tin của prefix đó
+    :Response: Trả về result là tổng hợp thông tin của prefix như: 
         Site, Status, Tenant, vlan, Description
     """
     try:
@@ -53,9 +53,9 @@ def search_prefix(ipaddr,prefix):
 
 def list_prefix():
     """Lấy tất cả các prefix
-    :param : Không cần truyền vào các thông số,
+    :Param : Không cần truyền vào các thông số,
     chỉ cần gọi hàm sẽ trả về kết quả.
-    :response: Trả về prefix_all bao gồm tổng số prefix và 
+    :Response: Trả về prefix_all bao gồm tổng số prefix và 
     liệt kê tất cả các prefix đó
     """
     try:
@@ -63,14 +63,14 @@ def list_prefix():
         prefix_count = netbox.ipam.prefixes.count()
         prefix_all = 'Tổng số Prefix : ' 
         prefix_all = prefix_all + str(prefix_count) + '\n\n' + str(prefix)
-    except:
-        prefix_all = 'no prefix'
+    except Exception as ex:
+        prefix_all = str(ex)
     return prefix_all
 
 def search_ip_address(ipaddr, prefix):
     """Lấy thông tin của địa chỉ IP
-    :param : Truyền vào địa chỉ IP kèm netmask
-    :response: Trả về info_ipaddr là tổng hợp thông tin của ip address bao gồm:
+    :Param : Truyền vào địa chỉ IP kèm netmask
+    :Response: Trả về info_ipaddr là tổng hợp thông tin của ip address bao gồm:
          Interface, Description, Tenant, Created, Last update
     """
     try:
@@ -118,9 +118,9 @@ def search_ip_address(ipaddr, prefix):
 
 def list_ip_address():
     """Lấy tất cả các IP hiện có
-    :param : Không cần truyền vào các thông số,
+    :Param : Không cần truyền vào các thông số,
     chỉ cần gọi hàm sẽ trả về kết quả.
-    :response: Trả về ipaddr_all bao gồm tổng số prefix và
+    :Response: Trả về ipaddr_all bao gồm tổng số prefix và
     liệt kê tất cả các prefix đó
     """
     try:
@@ -128,14 +128,14 @@ def list_ip_address():
         ipaddr_count = netbox.ipam.ip_addresses.count()
         ipaddr_all = 'Tổng số IP addresses : ' 
         ipaddr_all = ipaddr_all + str(ipaddr_count) + '\n\n' + str(ipaddr)
-    except:
-        ipaddr_all = 'no ip addresses'
+    except Exception as ex:
+        ipaddr_all = str(ex)
     return ipaddr_all
 
 def search_device(device):
     """Lấy thông tin của device
-    :param : Truyền vào tên của thiết bị 
-    :response: Trả về info_device là tổng hợp các thông tin của device như :     
+    :Param : Truyền vào tên của thiết bị 
+    :Response: Trả về info_device là tổng hợp các thông tin của device như :     
     Tenant, Role, Site, Type, Rack, Ipaddress, U, Platform, Serial, Assetag
     """
 
@@ -214,8 +214,8 @@ def search_device(device):
 
 def device_comment(device):
     """Lấy thông tin comment của device
-    :param device: Truyền vào tên của thiết bị
-    :response: Trả về kết quả là comment của thiết bị 
+    :Param device: Truyền vào tên của thiết bị
+    :Response: Trả về kết quả là comment của thiết bị 
     """
     try:
         single_device = netbox.dcim.devices.get(name='{}' .format(device))
@@ -223,15 +223,15 @@ def device_comment(device):
         if single_device.comments:
             comment = single_device.comments
         device_comment = "Comments" + " : " + "\n" + str(comment)
-    except: 
-        device_comment = "None"
+    except Exception as ex: 
+        device_comment = str(ex)
     return device_comment
 
 def list_device():
     """Lấy tất cả các device 
-    :param : Không cần truyền vào các thông số,
+    :Param : Không cần truyền vào các thông số,
     chỉ cần gọi hàm sẽ trả về kết quả.
-    :response: Trả về device_all bao gồm tổng số prefix và
+    :Response: Trả về device_all bao gồm tổng số prefix và
     liệt kê tất cả các prefix đó
     """
     try:
@@ -239,8 +239,8 @@ def list_device():
         device_count = netbox.dcim.devices.count()
         device_all = 'Tổng số device : ' 
         device_all = device_all + str(device_count) + '\n\n' + str(devices)
-    except:
-        device_all = 'no device'
+    except Exception as ex:
+        device_all = str(ex)
     return device_all
 
 @bot.message_handler(commands=["start"])

@@ -12,9 +12,9 @@ regex_ip = re.compile(config.REGEX_IP)
 
 def search_prefix(ipaddr,prefix):
     """Lấy các thông tin của prefix
-    :Param prefix: Là địa chỉ prefix truyền vào để lấy thông tin của prefix đó
-    :Response: Trả về result là tổng hợp thông tin của prefix như: 
-        Site, Status, Tenant, vlan, Description
+    :param prefix: Là địa chỉ prefix truyền vào để lấy thông tin của prefix đó
+    :response: Trả về result là tổng hợp thông tin của prefix như: 
+               Site, Status, Tenant, vlan, Description
     """
     try:
         single_prefix = netbox.ipam.prefixes.get(prefix='{}' .format(ipaddr), mask_length='{}' .format(prefix))
@@ -53,10 +53,10 @@ def search_prefix(ipaddr,prefix):
 
 def list_prefix():
     """Lấy tất cả các prefix
-    :Param : Không cần truyền vào các thông số,
-    chỉ cần gọi hàm sẽ trả về kết quả.
-    :Response: Trả về prefix_all bao gồm tổng số prefix và 
-    liệt kê tất cả các prefix đó
+    :param : Không cần truyền vào các thông số,
+             chỉ cần gọi hàm sẽ trả về kết quả.
+    :response: Trả về prefix_all bao gồm tổng số prefix và 
+               liệt kê tất cả các prefix đó
     """
     try:
         prefix = netbox.ipam.prefixes.all()
@@ -69,9 +69,9 @@ def list_prefix():
 
 def search_ip_address(ipaddr, prefix):
     """Lấy thông tin của địa chỉ IP
-    :Param : Truyền vào địa chỉ IP kèm netmask
-    :Response: Trả về info_ipaddr là tổng hợp thông tin của ip address bao gồm:
-         Interface, Description, Tenant, Created, Last update
+    :param : Truyền vào địa chỉ IP kèm netmask
+    :response: Trả về info_ipaddr là tổng hợp thông tin của ip address bao gồm:
+               Interface, Description, Tenant, Created, Last update
     """
     try:
         single_ipaddr = netbox.ipam.ip_addresses.get(address='{}' .format(ipaddr), mask_length='{}' .format(prefix))
@@ -118,10 +118,10 @@ def search_ip_address(ipaddr, prefix):
 
 def list_ip_address():
     """Lấy tất cả các IP hiện có
-    :Param : Không cần truyền vào các thông số,
-    chỉ cần gọi hàm sẽ trả về kết quả.
-    :Response: Trả về ipaddr_all bao gồm tổng số prefix và
-    liệt kê tất cả các prefix đó
+    :param : Không cần truyền vào các thông số,
+             chỉ cần gọi hàm sẽ trả về kết quả.
+    :response: Trả về ipaddr_all bao gồm tổng số prefix và
+               liệt kê tất cả các prefix đó
     """
     try:
         ipaddr = netbox.ipam.ip_addresses.all()
@@ -134,9 +134,10 @@ def list_ip_address():
 
 def search_device(device):
     """Lấy thông tin của device
-    :Param : Truyền vào tên của thiết bị 
-    :Response: Trả về info_device là tổng hợp các thông tin của device như :     
-    Tenant, Role, Site, Type, Rack, Ipaddress, U, Platform, Serial, Assetag
+    :param : Truyền vào tên của thiết bị 
+    :response: Trả về info_device là tổng hợp các thông tin của device như :     
+               Tenant, Role, Site, Type, Rack, Ipaddress,
+               U, Platform, Serial, Assetag
     """
 
     try:
@@ -214,8 +215,8 @@ def search_device(device):
 
 def device_comment(device):
     """Lấy thông tin comment của device
-    :Param device: Truyền vào tên của thiết bị
-    :Response: Trả về kết quả là comment của thiết bị 
+    :param device: Truyền vào tên của thiết bị
+    :response: Trả về kết quả là comment của thiết bị 
     """
     try:
         single_device = netbox.dcim.devices.get(name='{}' .format(device))
@@ -229,10 +230,10 @@ def device_comment(device):
 
 def list_device():
     """Lấy tất cả các device 
-    :Param : Không cần truyền vào các thông số,
-    chỉ cần gọi hàm sẽ trả về kết quả.
-    :Response: Trả về device_all bao gồm tổng số prefix và
-    liệt kê tất cả các prefix đó
+    :param : Không cần truyền vào các thông số,
+             chỉ cần gọi hàm sẽ trả về kết quả.
+    :response: Trả về device_all bao gồm tổng số prefix và
+               liệt kê tất cả các prefix đó
     """
     try:
         devices = netbox.dcim.devices.all()

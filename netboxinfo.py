@@ -10,17 +10,14 @@ bot = telebot.TeleBot(config.TOKEN_TELE)
 regex_ip = re.compile(config.REGEX_IP)
 
 
-def search_prefix(prefix):
+def search_prefix(ipaddr,prefix):
     """Lấy các thông tin của prefix
-
-    :Param prefix: Là địa chỉ prefix truyền vào để lấy thông tin của prefix đó
-
-    :Response: Trả về result là tổng hợp thông tin của prefix như: 
-        Site, Status, Tenant, vlan, Description
-
+    :param prefix: Là địa chỉ prefix truyền vào để lấy thông tin của prefix đó
+    :response: Trả về result là tổng hợp thông tin của prefix như: 
+               Site, Status, Tenant, vlan, Description
     """
     try:
-        single_prefix = netbox.ipam.prefixes.get(prefix='{}' .format(prefix))
+        single_prefix = netbox.ipam.prefixes.get(prefix='{}' .format(ipaddr), mask_length='{}' .format(prefix))
         ip_prefix = ''
         status_prefix = ''
         descr_prefix = ''
@@ -56,41 +53,39 @@ def search_prefix(prefix):
 
 def list_prefix():
     """Lấy tất cả các prefix
-
-    :Param : Không cần truyền vào các thông số,
-    chỉ cần gọi hàm sẽ trả về kết quả.
-
-    :Response: Trả về prefix_all bao gồm tổng số prefix và 
-    liệt kê tất cả các prefix đó
-
+    :param : Không cần truyền vào các thông số,
+             chỉ cần gọi hàm sẽ trả về kết quả.
+    :response: Trả về prefix_all bao gồm tổng số prefix và 
+               liệt kê tất cả các prefix đó
     """
     try:
         prefix = netbox.ipam.prefixes.all()
         prefix_count = netbox.ipam.prefixes.count()
         prefix_all = 'Tổng số Prefix : ' 
         prefix_all = prefix_all + str(prefix_count) + '\n\n' + str(prefix)
-    except:
-        prefix_all = 'no prefix'
+    except Exception as ex:
+        prefix_all = str(ex)
     return prefix_all
 
-def search_ip_address(ipaddr):
+def search_ip_address(ipaddr, prefix):
     """Lấy thông tin của địa chỉ IP
-
-    :Param : Truyền vào địa chỉ IP kèm netmask
-
-    :Response: Trả về info_ipaddr là tổng hợp thông tin của ip address bao gồm:
-         Interface, Description, Tenant, Created, Last update
-
+    :param : Truyền vào địa chỉ IP kèm netmask
+    :response: Trả về info_ipaddr là tổng hợp thông tin của ip address bao gồm:
+               Interface, Description, Tenant, Created, Last update
     """
     try:
-        single_ipaddr = netbox.ipam.ip_addresses.get(address='{}' .format(ipaddr))
+        single_ipaddr = netbox.ipam.ip_addresses.get(address='{}' .format(ipaddr), mask_length='{}' .format(prefix))
         interface_ip = ''
         descr_ip = ''
         create_ip = ''
         last_update_ip = ''
         tenant_ip = ''
         try:
-            parent_ip = single_ipaddr.interface.device.name
+            site_ip = single_ipaddr.interface.device.site
+        except:
+            site_ip = single_ipaddr.interface.device.site
+        try:
+            parent_ip = single_ipaddr.interface.device
         except:
             parent_ip = 'null'
         if single_ipaddr.interface:
@@ -111,6 +106,8 @@ def search_ip_address(ipaddr):
         info_ipaddr = info_ipaddr + '`' + str(descr_ip) + '`' + "\n"
         info_ipaddr = info_ipaddr + "Tenant" + " : " 
         info_ipaddr = info_ipaddr + '`' + str(tenant_ip) + '`' + "\n"
+        info_ipaddr = info_ipaddr + "Site" + " : "
+        info_ipaddr = info_ipaddr + '`' + str(site_ip) + '`' + "\n"
         info_ipaddr = info_ipaddr + "Created" + " : " 
         info_ipaddr = info_ipaddr + '`' + str(create_ip) + '`' + "\n"
         info_ipaddr = info_ipaddr + "Last updated" + " : " 
@@ -121,31 +118,26 @@ def search_ip_address(ipaddr):
 
 def list_ip_address():
     """Lấy tất cả các IP hiện có
-
-    :Param : Không cần truyền vào các thông số,
-    chỉ cần gọi hàm sẽ trả về kết quả.
-
-    :Response: Trả về ipaddr_all bao gồm tổng số prefix và
-    liệt kê tất cả các prefix đó
-
+    :param : Không cần truyền vào các thông số,
+             chỉ cần gọi hàm sẽ trả về kết quả.
+    :response: Trả về ipaddr_all bao gồm tổng số prefix và
+               liệt kê tất cả các prefix đó
     """
     try:
         ipaddr = netbox.ipam.ip_addresses.all()
         ipaddr_count = netbox.ipam.ip_addresses.count()
         ipaddr_all = 'Tổng số IP addresses : ' 
         ipaddr_all = ipaddr_all + str(ipaddr_count) + '\n\n' + str(ipaddr)
-    except:
-        ipaddr_all = 'no ip addresses'
+    except Exception as ex:
+        ipaddr_all = str(ex)
     return ipaddr_all
 
 def search_device(device):
     """Lấy thông tin của device
-
-    :Param : Truyền vào tên của thiết bị 
-
-    :Response: Trả về info_device là tổng hợp các thông tin của device như :     
-    Tenant, Role, Site, Type, Rack, Ipaddress, U, Platform, Serial, Assetag
-
+    :param : Truyền vào tên của thiết bị 
+    :response: Trả về info_device là tổng hợp các thông tin của device như :     
+               Tenant, Role, Site, Type, Rack, Ipaddress,
+               U, Platform, Serial, Assetag
     """
 
     try:
@@ -163,6 +155,7 @@ def search_device(device):
         platform_device = ''
         create_device = ''
         update_device = ''
+
         if single_device.name:
             name_device = single_device.name
         if single_device.tenant:
@@ -222,39 +215,33 @@ def search_device(device):
 
 def device_comment(device):
     """Lấy thông tin comment của device
-
-    :Param device: Truyền vào tên của thiết bị
-
-    :Response: Trả về kết quả là comment của thiết bị 
-
+    :param device: Truyền vào tên của thiết bị
+    :response: Trả về kết quả là comment của thiết bị 
     """
     try:
         single_device = netbox.dcim.devices.get(name='{}' .format(device))
         comment = "no comment"
         if single_device.comments:
             comment = single_device.comments
-        device_comment = "Comments" + " : " + "\n" + '`' + str(comment) +'`'
-    except: 
-        device_comment = "None"
+        device_comment = "Comments" + " : " + "\n" + str(comment)
+    except Exception as ex: 
+        device_comment = str(ex)
     return device_comment
 
 def list_device():
     """Lấy tất cả các device 
-
-    :Param : Không cần truyền vào các thông số,
-    chỉ cần gọi hàm sẽ trả về kết quả.
-
-    :Response: Trả về device_all bao gồm tổng số prefix và
-    liệt kê tất cả các prefix đó
-
+    :param : Không cần truyền vào các thông số,
+             chỉ cần gọi hàm sẽ trả về kết quả.
+    :response: Trả về device_all bao gồm tổng số prefix và
+               liệt kê tất cả các prefix đó
     """
     try:
         devices = netbox.dcim.devices.all()
         device_count = netbox.dcim.devices.count()
         device_all = 'Tổng số device : ' 
         device_all = device_all + str(device_count) + '\n\n' + str(devices)
-    except:
-        device_all = 'no device'
+    except Exception as ex:
+        device_all = str(ex)
     return device_all
 
 @bot.message_handler(commands=["start"])
@@ -284,9 +271,14 @@ def main():
         IP = message.text[8:]
         same_ip = regex_ip.match(IP)
         if same_ip :
-            result = search_prefix(IP)
-            bot.send_message(config.CHAT_ID,
-                             str(result), parse_mode='Markdown')
+            prefix = IP[-2:]
+            result = search_prefix(IP,prefix)
+            try:
+                bot.send_message(config.CHAT_ID,
+                                 str(result), parse_mode='Markdown')
+            except:
+                bot.send_message(config.CHAT_ID,
+                                 str(result))
         else:
             bot.send_message(config.CHAT_ID,
                              'Nhập sai rồi !!',parse_mode='Markdown')
@@ -299,9 +291,14 @@ def main():
         IP = message.text[8:]
         same_ip = regex_ip.match(IP)
         if same_ip :
-            result = search_ip_address(IP)
-            bot.send_message(config.CHAT_ID,
-                             str(result), parse_mode='Markdown')
+            prefix = IP[-2:]
+            result = search_ip_address(IP, prefix)
+            try:
+                bot.send_message(config.CHAT_ID,
+                                 str(result), parse_mode='Markdown')
+            except:
+                bot.send_message(config.CHAT_ID,
+                                 str(result))
         else:
             bot.send_message(config.CHAT_ID,
                              'Nhập sai rồi !!', parse_mode='Markdown')
@@ -314,10 +311,16 @@ def main():
         DEVICE = message.text[8:]
         info_device = search_device(DEVICE)
         comment = device_comment(DEVICE)
-        bot.send_message(config.CHAT_ID,
-                         str(info_device), parse_mode='Markdown')
-        bot.send_message(config.CHAT_ID,
-                         str(comment), parse_mode='Markdown')
+        try:
+            bot.send_message(config.CHAT_ID,
+                             str(info_device), parse_mode='Markdown')
+        except:
+            bot.send_message(config.CHAT_ID,str(info_device))
+        try:
+            bot.send_message(config.CHAT_ID,
+                             str(comment), parse_mode='Markdown')
+        except:
+            bot.send_message(config.CHAT_ID,str(comment))
 
     @bot.message_handler(commands=["alldevice"])
     def send_device_all(message):
@@ -326,15 +329,23 @@ def main():
             Nếu số ký tự gửi về telegram lớn hơn 4096,
         sẽ chia ra gửi thành nhiều message
         """
-        device_list = list_device()
-        device_all = str(device_list)
+        device_all = list_device()
         if len(device_all) > 4096:
             for x in range(0, len(device_all), 4096):
-                bot.send_message(config.CHAT_ID,
-                                 device_all[x:x+4096], parse_mode='Markdown')
+                try:
+                    bot.send_message(config.CHAT_ID,
+                                     device_all[x:x+4096],
+                                     parse_mode='Markdown')
+                except:
+                    bot.send_message(config.CHAT_ID,
+                                     device_all[x:x+4096])
         else:
-            bot.send_message(config.CHAT_ID,
-                             device_all, parse_mode='Markdown')
+            try:
+                bot.send_message(config.CHAT_ID,
+                                 device_all, parse_mode='Markdown')
+            except:
+                bot.send_message(config.CHAT_ID,
+                                 device_all)
 
     @bot.message_handler(commands=["allprefix"])
     def send_prefix_all(message):
@@ -347,11 +358,20 @@ def main():
         prefix_all = str(prefix_list)
         if len(prefix_all) > 4096:
             for x in range(0, len(prefix_all), 4096):
-                bot.send_message(config.CHAT_ID,
-                                 prefix_all[x:x+4096], parse_mode='Markdown')
+                try:
+                    bot.send_message(config.CHAT_ID,
+                                     prefix_all[x:x+4096],
+                                     parse_mode='Markdown')
+                except:
+                    bot.send_message(config.CHAT_ID,
+                                     prefix_all[x:x+4096])
         else:
-            bot.send_message(config.CHAT_ID,
-                             prefix_all, parse_mode='Markdown')
+            try:
+                bot.send_message(config.CHAT_ID,
+                                 prefix_all, parse_mode='Markdown')
+            except:
+                bot.send_message(config.CHAT_ID,
+                                 prefix_all)
 
     @bot.message_handler(commands=["allipaddr"])
     def send_ip_all(message):
@@ -364,9 +384,17 @@ def main():
         ipaddr_all = str(ipaddr_list)
         if len(ipaddr_all) > 4096:
             for x in range(0, len(ipaddr_all), 4096):
-                bot.send_message(config.CHAT_ID,
-                                 ipaddr_all[x:x+4096], parse_mode='Markdown')
+                try:
+                    bot.send_message(config.CHAT_ID,
+                                     ipaddr_all[x:x+4096], parse_mode='Markdown')
+                except:
+                    bot.send_message(config.CHAT_ID,
+                                     ipaddr_all[x:x+4096])
         else:
-            bot.send_message(config.CHAT_ID,
-                             ipaddr_all, parse_mode='Markdown')
+            try:
+                bot.send_message(config.CHAT_ID,
+                                 ipaddr_all, parse_mode='Markdown')
+            except:
+                bot.send_message(config.CHAT_ID,
+                                 ipaddr_all)
     bot.polling()

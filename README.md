@@ -93,23 +93,23 @@ Nếu chưa biết cách để lấy token, bạn có thể làm theo các bư�
 
 - Sau khi đăng nhập vào netbox, kích vào khu vực quản trị user : 
 
-![](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox1.png)
+![](./images/netbox1.png)
 
 - Kích vào tab user có hình bánh răng 
 
-![](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox2.png)
+![](./images/netbox2.png)
 
 - Ở mục token, kích vào Add token 
 
-![](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox4.png)
+![](./images/netbox4.png)
 
 - Lần lượt kích chọn user, ngày giờ hết hạn và lưu lại. 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox5.png)
+![Imgur](./images/netbox5.png)
 
 - Sau khi lưu ta sẽ có đoạn mã token. Hãy copy mã và điền vào file config. 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox3.png)
+![Imgur](./images/netbox3.png)
 
 **Kiểm tra lại file config**
 Sau khi ghi vào file, kiểm tra lại file config để chắc chắn đã điền đủ các thông tin 
@@ -122,7 +122,7 @@ egrep -v "^*#|^$" /opt/netbox-telegram/config.py
 
 Kết quả các trường đã điền thông tin như sau là ok 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox6.png)
+![Imgur](./images/netbox6.png)
 
 ### Bước 3: Tạo venv 
 
@@ -206,25 +206,25 @@ Sau khi nhập vào start, sẽ có những hướng dẫn để bạn có thể
 
 - Muốn xem tất cả các device hiện có, ta sử dụng `/alldevice` 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox8.png)
+![Imgur](./images/netbox8.png)
 
 - Muốn xem tất cả các prefix hiện có, ta sử dụng `/allprefix` 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox7.png)
+![Imgur](./images/netbox7.png)
 
 - Muốn xem tất cả các IP address hiện có, ta sử dụng `/allipaddr` 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox9.png)
+![Imgur](./images/netbox9.png)
 
 - Để xem thông tin của từng IP, ta sử dụng `ipaddr` kèm địa chỉ IP
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox10.png)
+![Imgur](./images/netbox10.png)
 
 - Để xem thông tin của từng thiết bị, ta sử dụng `device` kèm tên thiết bị 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox11.png)
+![Imgur](./images/netbox11.png)
 
 - Để xem thông tin của từng prefix, ta sử dụng `prefix` kèm địa chỉ prefix 
 
-![Imgur](https://github.com/hungviet99/netboxinfo/blob/master/Image/netbox12.png)
+![Imgur](./images/netbox12.png)
 
